@@ -1,12 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
+import { Landing } from './src/Screens/landing';
+import { useFonts } from "expo-font"
+import { customFontsToLoad } from './src/Theme';
 
 export default function App() {
+
+  const [fontsLoaded, fontError] = useFonts(customFontsToLoad);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <Landing/>
+    </SafeAreaProvider>
   );
 }
 
