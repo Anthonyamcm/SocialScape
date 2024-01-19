@@ -1,10 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
-import { Landing } from './src/Screens/landing';
 import { useFonts } from "expo-font"
 import { customFontsToLoad } from './src/Theme';
+import { AppNavigator } from './src/Navigation/AppNavigator';
+import * as Linking from "expo-linking"
+
+
+const prefix = Linking.createURL("/")
+const config = {
+  screens: {
+    Landing: "",
+    login: "Login",
+    register: "Register"
+  },
+}
 
 export default function App() {
+
+  const linking = {
+    prefixes: [prefix],
+    config,
+  }
 
   const [fontsLoaded, fontError] = useFonts(customFontsToLoad);
 
@@ -13,7 +29,9 @@ export default function App() {
   }
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <Landing/>
+      <AppNavigator
+          linking={linking}
+        />
     </SafeAreaProvider>
   );
 }

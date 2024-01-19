@@ -149,7 +149,7 @@ export function Button(props: ButtonProps) {
 }
 
 const $baseViewStyle: ViewStyle = {
-  minHeight: 56,
+  minHeight: 32,
   borderRadius: 16,
   justifyContent: "center",
   alignItems: "center",
@@ -208,7 +208,7 @@ const $pressedViewPresets: Record<Presets, StyleProp<ViewStyle>> = {
   default: { backgroundColor: colors.palette.neutral100 },
   filled: { backgroundColor: colors.palette.neutral400 },
   reversed: { backgroundColor: colors.palette.neutral700 },
-  gradient: { backgroundColor: colors.palette.neutral200 },
+  gradient: { backgroundColor: colors.palette.primary300 },
 };
 
 const $pressedTextPresets: Record<Presets, StyleProp<TextStyle>> = {

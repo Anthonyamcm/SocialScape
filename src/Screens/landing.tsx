@@ -1,12 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { AppStackScreenProps } from "../Navigation/AppNavigator";
 import { Screen } from "../Components/Screen";
 import Logo from "../../assets/logo.svg";
 import { Button } from "../Components/Button";
 import { colors } from "../Theme";
 
-export function Landing() {
+interface LandingScreenProps extends AppStackScreenProps<"Landing"> {}
+
+export const LandingScreen: FC<LandingScreenProps> = function Landing(_props) {
+  const { navigation } = _props;
+
   return (
     <Screen
       preset="fixed"
@@ -18,20 +22,24 @@ export function Landing() {
         <Button
           preset="gradient"
           colors={[colors.palette.primary100, colors.palette.primary200]}
+          onPress={() => navigation.navigate("Login")}
         >
           {"Sign In"}
         </Button>
-        <Button preset="filled">{"Create Account"}</Button>
+        <Button preset="filled" onPress={() => navigation.navigate("Register")}>
+          {"Create Account"}
+        </Button>
       </View>
     </Screen>
   );
-}
+};
 
 const styles = StyleSheet.create({
   screen: {
     padding: 32,
     justifyContent: "center",
-    height: "100%",
+    flex: 1,
+    backgroundColor: "#fff",
   },
   column: {
     flexDirection: "column",
