@@ -10,11 +10,13 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import React from "react";
-import { useColorScheme } from "react-native";
 import { LoginScreen, LandingScreen } from "../Screens";
 import { navigationRef } from "./NavigatorUtils";
 import { colors } from "../Theme";
-import { RegisterScreen } from "../Screens/Register";
+import { RegisterScreen } from "../Screens/Register/Register";
+import { MainNavigator } from "./MainNavigator";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "../Config/queryConfig";
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -33,6 +35,7 @@ export type AppStackParamList = {
   Landing: undefined;
   Login: undefined;
   Register: undefined;
+  Main: undefined;
 };
 
 /**
@@ -58,6 +61,7 @@ const AppStack = function AppStack() {
       <Stack.Screen name="Landing" component={LandingScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="Main" component={MainNavigator} />
     </Stack.Navigator>
   );
 };
@@ -66,11 +70,11 @@ export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 export const AppNavigator = function AppNavigator(props: NavigationProps) {
-  const colorScheme = useColorScheme();
-
   return (
     <NavigationContainer ref={navigationRef} theme={DefaultTheme} {...props}>
-      <AppStack />
+      <QueryClientProvider client={queryClient}>
+        <AppStack />
+      </QueryClientProvider>
     </NavigationContainer>
   );
 };

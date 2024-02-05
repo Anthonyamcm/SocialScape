@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
-import { AppStackScreenProps } from "../Navigation/AppNavigator";
+import { MainTabScreenProps } from "../Navigation/MainNavigator";
 import { Screen } from "../Components/Screen";
 import Logo from "../../assets/logo.svg";
 import { Button } from "../Components/Button";
 import { colors } from "../Theme";
 
-interface LandingScreenProps extends AppStackScreenProps<"Landing"> {}
+interface SearhScreenProps extends MainTabScreenProps<"Search"> {}
 
-export const LandingScreen: FC<LandingScreenProps> = function Landing(_props) {
+export const SearchScreen: FC<SearhScreenProps> = function Landing(_props) {
   const { navigation } = _props;
 
   return (
@@ -21,7 +21,7 @@ export const LandingScreen: FC<LandingScreenProps> = function Landing(_props) {
       <View style={styles.column}>
         <Button
           preset="gradient"
-          gradient={[colors.palette.primary100, colors.palette.primary200]}
+          colors={[colors.palette.primary100, colors.palette.primary200]}
           onPress={() => navigation.navigate("Login")}
         >
           {"Sign In"}

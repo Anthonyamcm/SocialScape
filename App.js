@@ -4,6 +4,8 @@ import { useFonts } from "expo-font"
 import { customFontsToLoad } from './src/Theme';
 import { AppNavigator } from './src/Navigation/AppNavigator';
 import * as Linking from "expo-linking"
+import Toast from 'react-native-toast-message';
+import { toastConfig } from './src/Config/toastConfig';
 
 
 const prefix = Linking.createURL("/")
@@ -32,6 +34,7 @@ export default function App() {
       <AppNavigator
           linking={linking}
         />
+        <Toast config={toastConfig}/>
     </SafeAreaProvider>
   );
 }

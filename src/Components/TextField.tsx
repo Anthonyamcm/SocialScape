@@ -19,7 +19,6 @@ import { Text, TextProps } from "./Text";
 
 export interface TextFieldAccessoryProps {
   style: StyleProp<any>;
-  status: TextFieldProps["status"];
   multiline: boolean;
   editable: boolean;
 }
@@ -28,7 +27,7 @@ export interface TextFieldProps extends Omit<TextInputProps, "ref"> {
   /**
    * A style modifier for different input states.
    */
-  status?: "error" | "disabled";
+  error?: boolean;
   /**
    * The label text to display if not using `labelTx`.
    */
@@ -88,7 +87,7 @@ export const TextField = forwardRef(function TextField(
     label,
     placeholder,
     helper,
-    status,
+    error,
     RightAccessory,
     LeftAccessory,
     HelperTextProps,
@@ -100,7 +99,7 @@ export const TextField = forwardRef(function TextField(
   } = props;
   const input = useRef<TextInput>(null);
 
-  const disabled = TextInputProps.editable === false || status === "disabled";
+  const disabled = TextInputProps.editable === false;
 
   const placeholderContent = placeholder;
 
@@ -110,7 +109,7 @@ export const TextField = forwardRef(function TextField(
 
   const $inputWrapperStyles = [
     $inputWrapperStyle,
-    status === "error" && { borderColor: colors.error },
+    error && { borderColor: colors.palette.error100 },
     TextInputProps.multiline && { minHeight: 112 },
     LeftAccessory && { paddingStart: 0 },
     RightAccessory && { paddingEnd: 0 },
@@ -126,7 +125,7 @@ export const TextField = forwardRef(function TextField(
 
   const $helperStyles = [
     $helperStyle,
-    status === "error" && { color: colors.error },
+    error && { color: colors.error },
     HelperTextProps?.style,
   ];
 
@@ -158,7 +157,6 @@ export const TextField = forwardRef(function TextField(
         {!!LeftAccessory && (
           <LeftAccessory
             style={$leftAccessoryStyle}
-            status={status}
             editable={!disabled}
             multiline={TextInputProps.multiline ?? false}
           />
@@ -169,7 +167,9 @@ export const TextField = forwardRef(function TextField(
           underlineColorAndroid={colors.transparent}
           textAlignVertical="top"
           placeholder={placeholderContent}
-          placeholderTextColor={colors.textDim}
+          placeholderTextColor={
+            error ? colors.palette.error100 : colors.textDim
+          }
           {...TextInputProps}
           editable={!disabled}
           style={$inputStyles}
@@ -178,7 +178,6 @@ export const TextField = forwardRef(function TextField(
         {!!RightAccessory && (
           <RightAccessory
             style={$rightAccessoryStyle}
-            status={status}
             editable={!disabled}
             multiline={TextInputProps.multiline ?? false}
           />
@@ -207,6 +206,8 @@ const $inputWrapperStyle: ViewStyle = {
   borderRadius: 12,
   backgroundColor: colors.palette.neutral200,
   overflow: "hidden",
+  borderWidth: 3,
+  borderColor: colors.palette.neutral200,
 };
 
 const $inputStyle: TextStyle = {

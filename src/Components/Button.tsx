@@ -7,6 +7,7 @@ import {
   TextStyle,
   ViewStyle,
   Text,
+  ActivityIndicator,
 } from "react-native";
 import { colors, typography, spacing } from "../Theme";
 import { LinearGradient } from "expo-linear-gradient";
@@ -40,6 +41,10 @@ export interface ButtonProps extends PressableProps {
    */
   preset: Presets;
   /**
+   * Pass isLoading
+   */
+  isLoading?: boolean;
+  /**
    * An optional component to render on the right side of the text.
    * Example: `RightAccessory={(props) => <View {...props} />}`
    */
@@ -52,7 +57,7 @@ export interface ButtonProps extends PressableProps {
   /**
    * Gradient colours
    */
-  colors?: string[];
+  gradient?: string[];
   /**
    * Children components.
    */
@@ -74,7 +79,8 @@ export function Button(props: ButtonProps) {
     children,
     RightAccessory,
     LeftAccessory,
-    colors,
+    isLoading,
+    gradient,
     ...rest
   } = props;
 
@@ -94,10 +100,10 @@ export function Button(props: ButtonProps) {
     ];
   }
 
-  if (colors)
+  if (gradient)
     return (
       <LinearGradient
-        colors={colors}
+        colors={gradient}
         start={{ x: 0.3, y: 0 }}
         end={{ x: 1, y: 0.25 }}
         style={$gradientStyle}
@@ -112,7 +118,14 @@ export function Button(props: ButtonProps) {
                 />
               )}
 
-              <Text style={$textStyle(state)}>{children}</Text>
+              {isLoading ? (
+                <ActivityIndicator
+                  size="large"
+                  color={colors.palette.neutral100}
+                />
+              ) : (
+                <Text style={$textStyle(state)}>{children}</Text>
+              )}
 
               {!!RightAccessory && (
                 <RightAccessory
