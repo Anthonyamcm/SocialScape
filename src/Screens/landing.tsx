@@ -5,21 +5,11 @@ import { Screen } from "../Components/Screen";
 import Logo from "../../assets/logo.svg";
 import { Button } from "../Components/Button";
 import { colors } from "../Theme";
-import { useStores } from "../Models/Store/helpers/useStore";
 
 interface LandingScreenProps extends AppStackScreenProps<"Landing"> {}
 
 export const LandingScreen: FC<LandingScreenProps> = function Landing(_props) {
   const { navigation } = _props;
-
-  const {
-    authenticationStore: { authToken, loadUserAndToken },
-  } = useStores();
-
-  useEffect(() => {
-    const user = loadUserAndToken();
-    console.log(user);
-  });
 
   return (
     <Screen

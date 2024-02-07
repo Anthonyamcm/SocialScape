@@ -18,12 +18,14 @@ import {
   FeedScreen,
   SearchScreen,
 } from "../Screens";
+import { SettingsScreen } from "../Screens/Settings/Settings";
 
 export type MainTabParamList = {
   Dashboard: undefined;
   Feed: undefined;
   Search: undefined;
   Profile: undefined;
+  Settings: undefined;
 };
 
 /**
@@ -59,7 +61,6 @@ export function MainNavigator() {
       <Tab.Screen
         name="Dashboard"
         component={DashboardScreen}
-        
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
@@ -112,6 +113,21 @@ export function MainNavigator() {
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name="account-circle"
+              size={24}
+              color={
+                focused ? colors.palette.neutral300 : colors.palette.neutral200
+              }
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <MaterialIcons
+              name="settings"
               size={24}
               color={
                 focused ? colors.palette.neutral300 : colors.palette.neutral200

@@ -16,7 +16,7 @@ export const useRegisterHook = (navigation: any) => {
         try {
           const response = await api.post('users/register', data);
       
-          if (response.status === 200) {
+          if (response.status === 201) {
             // Return data for successful request
             return response.data;
           } else {

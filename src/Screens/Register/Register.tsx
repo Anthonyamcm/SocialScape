@@ -84,8 +84,8 @@ export const RegisterScreen: FC<RegisterScreenProps> = function Register(
                   )}
                   value={values.first_name}
                   ref={firstNameRef}
-                  onChangeText={handleChange("firstName")}
-                  onBlur={handleBlur("firstName")}
+                  onChangeText={handleChange("first_name")}
+                  onBlur={handleBlur("first_name")}
                   error={!!errors.first_name}
                 />
                 <TextField
@@ -93,8 +93,8 @@ export const RegisterScreen: FC<RegisterScreenProps> = function Register(
                   containerStyle={{ flex: 1 }}
                   value={values.last_name}
                   ref={lastNameRef}
-                  onChangeText={handleChange("lastName")}
-                  onBlur={handleBlur("lastName")}
+                  onChangeText={handleChange("last_name")}
+                  onBlur={handleBlur("last_name")}
                   error={!!errors.last_name}
                 />
               </View>
