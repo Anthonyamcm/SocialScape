@@ -1,5 +1,5 @@
 // App.js
-import React, {useEffect} from "react";
+import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import { customFontsToLoad } from "./src/Theme";
@@ -22,7 +22,7 @@ const config = {
 };
 
 export const App = observer(() => {
-  const { rehydrated } = useInitialRootStore();
+  const { rehydrated } = useInitialRootStore(() => {});
   const [fontsLoaded] = useFonts(customFontsToLoad);
   const authStore = AuthenticationStore.create({
     authToken: undefined,
@@ -37,21 +37,12 @@ export const App = observer(() => {
     return null;
   }
 
-  // useEffect(() => {
-  //   if(rehydrated){
-  //     authStore.loadUserAndToken();
-  //     console.log(authStore)
-  //   }
-  // }, [authStore]);
-
   return (
     <SafeAreaProvider>
-      
+      <Provider authStore={authStore}>
         <AppNavigator linking={linking} />
         <Toast config={toastConfig} />
-    
+      </Provider>
     </SafeAreaProvider>
   );
 });
-
-export default App

@@ -1,12 +1,16 @@
 import { useMutation } from 'react-query';
 import api from './api';
-import { IRegisterUser } from '../Config/interfaces';
+import { IRegisterUser } from '../Utils/interfaces';
 import { AxiosError } from 'axios';
 import Toast from 'react-native-toast-message';
+import { useStores } from '../Models/Store/helpers/useStore';
 
 
 export const useRegisterHook = (navigation: any) => {
 
+    const {
+        authenticationStore: { setUserAndToken },
+      } = useStores()
 
     const postData = async (data: IRegisterUser) => {
         try {
@@ -37,7 +41,8 @@ export const useRegisterHook = (navigation: any) => {
               });
         }
       },
-      onSuccess: () => {
+      onSuccess: (data) => {
+        setUserAndToken(data.user, data.token)
         navigation.navigate("Main")
       },
       retry: 0,

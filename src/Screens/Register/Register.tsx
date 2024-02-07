@@ -9,7 +9,7 @@ import { Button } from "../../Components/Button";
 import { Text } from "../../Components/Text";
 import { AppStackScreenProps } from "../../Navigation/AppNavigator";
 import useRegister from "./useRegister";
-import { IRegisterUser } from "../../Config/interfaces";
+import { IRegisterUser } from "../../Utils/interfaces";
 
 interface RegisterScreenProps extends AppStackScreenProps<"Register"> {}
 
@@ -75,38 +75,38 @@ export const RegisterScreen: FC<RegisterScreenProps> = function Register(
                       name="badge-account"
                       size={24}
                       color={
-                        errors.firstName
+                        errors.first_name
                           ? colors.palette.error100
                           : colors.palette.neutral300
                       }
                       style={styles.icon}
                     />
                   )}
-                  value={values.firstName}
+                  value={values.first_name}
                   ref={firstNameRef}
                   onChangeText={handleChange("firstName")}
                   onBlur={handleBlur("firstName")}
-                  error={!!errors.firstName}
+                  error={!!errors.first_name}
                 />
                 <TextField
                   placeholder={"Last Name"}
                   containerStyle={{ flex: 1 }}
-                  value={values.lastName}
+                  value={values.last_name}
                   ref={lastNameRef}
                   onChangeText={handleChange("lastName")}
                   onBlur={handleBlur("lastName")}
-                  error={!!errors.lastName}
+                  error={!!errors.last_name}
                 />
               </View>
-              {(errors.firstName && touched.firstName) ||
-              (errors.lastName && touched.lastName) ? (
+              {(errors.first_name && touched.first_name) ||
+              (errors.last_name && touched.last_name) ? (
                 <Text
                   style={{
                     color: colors.palette.error100,
-                    alignSelf: errors.firstName ? "flex-start" : "flex-end",
+                    alignSelf: errors.first_name ? "flex-start" : "flex-end",
                   }}
                 >
-                  {errors.firstName || errors.lastName}
+                  {errors.first_name || errors.last_name}
                 </Text>
               ) : null}
               <TextField

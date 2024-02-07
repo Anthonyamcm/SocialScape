@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.sm,
     overflow: "hidden",
     width: "85%",
-    zIndex: 999,
     borderRadius: 16,
   },
 });

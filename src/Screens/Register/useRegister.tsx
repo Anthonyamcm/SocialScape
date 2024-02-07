@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput } from "react-native";
 import { object, string } from "yup";
-import { IRegisterUser } from "../../Config/interfaces";
+import { IRegisterUser } from "../../Utils/interfaces";
 import { useRegisterHook } from "../../Api/useRegister";
 
 const useRegister = (navigation: any) => {
@@ -11,8 +11,8 @@ const useRegister = (navigation: any) => {
   const passwordRef = React.useRef<TextInput>(null);
 
   let userSchema = object().shape({
-    firstName: string().required("First Name is required"),
-    lastName: string().required("Last Name is required"),
+    first_name: string().required("First Name is required"),
+    last_name: string().required("Last Name is required"),
     email: string().email().required("Email is required"),
     password: string()
       .min(8, "Password must be at least 8 characters")
@@ -30,8 +30,8 @@ const useRegister = (navigation: any) => {
   };
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
   };

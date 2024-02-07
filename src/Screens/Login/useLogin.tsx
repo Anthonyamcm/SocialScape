@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput } from "react-native";
 import { object, string } from "yup";
-import { ILoginUser } from "../../Config/interfaces";
+import { ILoginUser } from "../../Utils/interfaces";
 import { useLoginHook } from "../../Api/useLogin";
 
 const useLogin = (navigation) => {
@@ -18,8 +18,7 @@ const useLogin = (navigation) => {
     password: "",
   };
 
-  const { mutate, isLoading, isSuccess, data, isError } =
-    useLoginHook(navigation);
+  const { mutate, isLoading, isError } = useLoginHook(navigation);
 
   const onSubmit = (values: ILoginUser) => {
     mutate(values);

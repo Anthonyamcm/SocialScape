@@ -17,6 +17,7 @@ import { RegisterScreen } from "../Screens/Register/Register";
 import { MainNavigator } from "./MainNavigator";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "../Config/queryConfig";
+import { useStores } from "../Models/Store/helpers/useStore";
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -50,13 +51,17 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> =
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = function AppStack() {
+  const {
+    authenticationStore: { authToken },
+  } = useStores();
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,
       }}
-      initialRouteName={"Landing"}
+      initialRouteName={authToken ? "Main" : "Landing"}
     >
       <Stack.Screen name="Landing" component={LandingScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />

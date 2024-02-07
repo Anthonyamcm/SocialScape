@@ -9,7 +9,7 @@ import { Button } from "../../Components/Button";
 import { Text } from "../../Components/Text";
 import { AppStackScreenProps } from "../../Navigation/AppNavigator";
 import useLogin from "./useLogin";
-import { ILoginUser } from "../../Config/interfaces";
+import { ILoginUser } from "../../Utils/interfaces";
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 

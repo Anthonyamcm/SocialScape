@@ -1,10 +1,15 @@
 import { useMutation } from 'react-query';
 import api from './api';
-import { ILoginUser } from '../Config/interfaces';
+import { ILoginUser } from '../Utils/interfaces';
 import { AxiosError } from 'axios';
 import Toast from 'react-native-toast-message';
+import { useStores } from '../Models/Store/helpers/useStore';
 
 export const useLoginHook = (navigation) => {
+
+    const {
+        authenticationStore: { setUserAndToken },
+      } = useStores()
 
 
     const postData = async (data: ILoginUser) => {
@@ -37,7 +42,8 @@ export const useLoginHook = (navigation) => {
               });
         }
       },
-      onSuccess: () => {
+      onSuccess: (data) => {
+        setUserAndToken(data.user, data.token)
         navigation.navigate("Main")
       },
       retry: 0,
